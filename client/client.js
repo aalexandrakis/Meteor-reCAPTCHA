@@ -2,6 +2,9 @@ reCAPTCHA = {
     settings: {},
     
     config: function(settings) {
+        if (this.settings.lang === undefined){
+            this.settings.lang = "en";
+        }
         return _.extend(this.settings, settings);
     },
 }
@@ -19,5 +22,5 @@ window.onloadcaptcha = function() {
 };
 
 Template.reCAPTCHA.rendered = function() {
-    $.getScript('//www.google.com/recaptcha/api.js?onload=onloadcaptcha&render=explicit');
+    $.getScript('//www.google.com/recaptcha/api.js?onload=onloadcaptcha&render=explicit&hl='reCAPTCHA.settings.lang);
 }
