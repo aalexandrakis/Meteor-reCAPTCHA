@@ -1,6 +1,6 @@
 # Google reCAPTCHA V2 for Meteor
 
-This package implements the version 2 of Google reCAPTCHA. This is a fork of the packages [appshore/Meteor-reCAPTCHA](https://github.com/appshore/Meteor-reCAPTCHA.git) [Altapp/Meteor-reCAPTCHA](https://github.com/Altapp/Meteor-reCAPTCHA) which implements Google reCAPTCHA version 1 and package [yuea/Meteor-reCAPTCHA](https://github.com/yuea/Meteor-reCAPTCHA) for version 2.
+This package implements the version 2 of Google reCAPTCHA. This is a fork of the packages [appshore/Meteor-reCAPTCHA](https://github.com/appshore/Meteor-reCAPTCHA.git), [Altapp/Meteor-reCAPTCHA](https://github.com/Altapp/Meteor-reCAPTCHA) which implements Google reCAPTCHA version 1 and package [yuea/Meteor-reCAPTCHA](https://github.com/yuea/Meteor-reCAPTCHA) for version 2.
 
 Google reCAPTCHA is a free CAPTCHA service that protects your site against spam, malicious registrations and other forms of attacks where computers try to disguise themselves as a human. In addition to protecting your site, reCAPTCHA also helps digitize old books and newspapers.
 
