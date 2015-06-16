@@ -1,7 +1,7 @@
 Package.describe({
-    name: "appshore:recaptcha",
+    name: "aalexandrakis:recaptcha",
     summary: "Implementation of Google reCAPTCHA V2 for Meteor",
-    git: "https://github.com/appshore/Meteor-reCAPTCHA.git",
+    git: "https://github.com/aalexandrakis/Meteor-reCAPTCHA.git",
     version: "2.0.5",
     license: "MIT"
 });
