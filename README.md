@@ -11,7 +11,7 @@ You will need to sign up for an API key at https://www.google.com/recaptcha/admi
 ## Installation
 
 ``` sh
-$ meteor add appshore:recaptcha
+$ meteor add aalexandrakis:recaptcha
 ```
 
 ## Setup
