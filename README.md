@@ -25,7 +25,8 @@ Meteor.startup(function() {
     reCAPTCHA.config({
         theme: 'light'  // 'light' default or 'dark'
         publickey: 'your_public_key_from_google',
-        lang: 'es' //default 'en' https://developers.google.com/recaptcha/docs/language
+        lang: 'es', //default 'en' https://developers.google.com/recaptcha/docs/language
+        fallback: 'true' //default false
     });
 });
 ```

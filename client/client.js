@@ -5,6 +5,9 @@ reCAPTCHA = {
         if (this.settings.lang === undefined){
             this.settings.lang = "en";
         }
+        if (this.settings.fallback === undefined){
+            this.settings.fallback = false;
+        }
         return _.extend(this.settings, settings);
     },
 }
@@ -22,5 +25,5 @@ window.onloadcaptcha = function() {
 };
 
 Template.reCAPTCHA.rendered = function() {
-    $.getScript('//www.google.com/recaptcha/api.js?fallback=true&onload=onloadcaptcha&render=explicit&hl=' + reCAPTCHA.settings.lang);
+    $.getScript('//www.google.com/recaptcha/api.js?fallback=' +  reCAPTCHA.settings.fallback + '&onload=onloadcaptcha&render=explicit&hl=' + reCAPTCHA.settings.lang);
 }
