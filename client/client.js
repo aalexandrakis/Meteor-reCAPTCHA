@@ -13,7 +13,7 @@ reCAPTCHA = {
 }
 
 
-window.onloadcaptcha = function() { 
+window.onloadcaptcha = function() {
 	$( "#recaptcha-container" ).empty();
 	grecaptcha.render('recaptcha-container', {
         	sitekey: reCAPTCHA.settings.publickey,
@@ -30,4 +30,16 @@ Template.reCAPTCHA.rendered = function() {
     } else {
         $.getScript('//www.google.com/recaptcha/api.js?onload=onloadcaptcha&render=explicit&hl=' + reCAPTCHA.settings.lang);
     }
+}
+
+Template.reCAPTCHA.helpers = {
+    sitekey : function(){
+        return reCAPTCHA.settings.publickey;
+    },
+    lang : function(){
+        return reCAPTCHA.settings.lang;
+    },
+    fallback : function(){
+        return reCAPTCHA.settings.fallback;
+    },
 }
