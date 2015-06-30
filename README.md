@@ -1,6 +1,6 @@
 # Google reCAPTCHA V2 for Meteor
 
-This package implements the version 2 of Google reCAPTCHA. This is a fork of the packages [appshore/Meteor-reCAPTCHA](https://github.com/appshore/Meteor-reCAPTCHA.git), [Altapp/Meteor-reCAPTCHA](https://github.com/Altapp/Meteor-reCAPTCHA) which implements Google reCAPTCHA version 1 and package [yuea/Meteor-reCAPTCHA](https://github.com/yuea/Meteor-reCAPTCHA) for version 2.
+This package implements the version 1 and 2 of Google reCAPTCHA. This is a fork of the packages [appshore/Meteor-reCAPTCHA](https://github.com/appshore/Meteor-reCAPTCHA.git), [Altapp/Meteor-reCAPTCHA](https://github.com/Altapp/Meteor-reCAPTCHA) which implements Google reCAPTCHA version 1 and package [yuea/Meteor-reCAPTCHA](https://github.com/yuea/Meteor-reCAPTCHA) for version 2.
 
 Google reCAPTCHA is a free CAPTCHA service that protects your site against spam, malicious registrations and other forms of attacks where computers try to disguise themselves as a human. In addition to protecting your site, reCAPTCHA also helps digitize old books and newspapers.
 
@@ -26,7 +26,8 @@ Meteor.startup(function() {
         theme: 'light'  // 'light' default or 'dark'
         publickey: 'your_public_key_from_google',
         lang: 'es', //default 'en' https://developers.google.com/recaptcha/docs/language
-        fallback: 'true' //default false
+        fallback: true, //default false
+        useOldCaptcha: true //default false
     });
 });
 ```
@@ -71,18 +72,32 @@ Template.myTemplate.events({
         
         //console.log('g-recaptcha-response', $('#g-recaptcha-response').val(), evt);
 
+        if (!reCAPTCHA.settings.useOldCaptcha){
+            gRecaptchaResponse = $('#g-recaptcha-response').val();
+        } else {
+            gRecaptchaResponse = {
+                captcha_challenge_id: Recaptcha.get_challenge(),
+                captcha_solution: Recaptcha.get_response()
+            }
+        }
         var formData = {
             //get the data from your form fields
             ...
             
             // and the recaptcha response
-            g-recaptcha-response : $('#g-recaptcha-response').val()
+            gRecaptchaResponse : $('#g-recaptcha-response').val()
         };
 
         Meteor.call('formSubmissionMethod', formData, function (error, result) {
             // recaptcha server response will be in result
             console.log('result: ', error, result);
         });
+
+        // If the page is not redirected on submit and you are using the V2 Captcha you must
+        // reset the captcha widget
+        if (!reCAPTCHA.settings.useOldCaptcha){
+            grecaptcha.reset();
+        }
     }
 });
 ```
@@ -95,7 +110,7 @@ In the server method, pass the captcha data and the user's IP address to `reCAPT
 Meteor.methods({
     formSubmissionMethod: function(formData) {
 
-        var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, formData.g-recaptcha-response);
+        var verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, formData.gRecaptchaResponse);
 
         //console.log('reCAPTCHA response', verifyCaptchaResponse.data);
         /* verifyCaptchaResponse.data returns a json {
