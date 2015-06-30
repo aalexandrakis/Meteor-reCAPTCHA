@@ -85,7 +85,7 @@ Template.myTemplate.events({
             ...
             
             // and the recaptcha response
-            gRecaptchaResponse : $('#g-recaptcha-response').val()
+            gRecaptchaResponse : gRecaptchaResponse
         };
 
         Meteor.call('formSubmissionMethod', formData, function (error, result) {
